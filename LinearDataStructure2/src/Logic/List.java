@@ -13,7 +13,6 @@ import Data.Node;
 
 public class List {
 
-	
 	public Node head;
 	
 	public List()
