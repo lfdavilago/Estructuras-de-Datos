@@ -382,7 +382,14 @@ public class List {
 	
 	public List cloneList()
 	{
-		return null;
+		List clone = new List();
+		Node temp = this.head;
+		while(temp != null)
+		{
+			clone.insertAtEnd(temp.clone());
+			temp = temp.next;
+		}
+		return clone;
 	}
 	
 	public static void main(String[] args) throws IOException 
