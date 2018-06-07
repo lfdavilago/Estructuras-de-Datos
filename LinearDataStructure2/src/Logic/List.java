@@ -369,8 +369,8 @@ public class List {
 		while(tempCurrent != null && tempList != null)
 			if(tempCurrent.isEqual(tempList))
 			{
-				tempCurrent = tempCurrent.getNext();
-				tempList = tempList.getNext();
+				tempCurrent = tempCurrent.next;
+				tempList = tempList.next;
 			}
 			else
 			{

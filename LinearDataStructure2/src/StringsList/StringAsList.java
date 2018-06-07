@@ -102,8 +102,27 @@ public class StringAsList {
 	 */
 	public boolean contains(StringAsList regex)
 	{
+		if(this.length() < regex.length())
+			return false;
+		else
+		{	
+			int subStringLength = regex.length();
+
+			for(int i = 0; i < this.length() ;i++)
+			{
+				if(i + subStringLength < this.length())
+				{
+					StringAsList subString = this.substring(i, i + subStringLength);
+					if(subString.string.isEqual(regex.string))
+						return true;
+				}
+				else
+					break;
+			}
 		
-		return false;
+			return false;
+		}
+	
 	}
 	
 	
@@ -240,7 +259,7 @@ public class StringAsList {
 	{
 		
 		
-		String ss ="acasohubobuhosacah";
+		String ss ="acasohubobuhosaca";
 		
 		StringAsList s = new StringAsList(ss.toCharArray());
 		
@@ -275,7 +294,11 @@ public class StringAsList {
 			System.out.println("No Anagram");
 		
 		System.out.println(Origin.indexOf(new StringAsList("l".toCharArray())));
-	
+		
+		if(Origin.contains(new StringAsList("aeliasme".toCharArray())))
+			System.out.println("Contains");
+		else
+			System.out.println("No Contains");
 	}
 	
 	
