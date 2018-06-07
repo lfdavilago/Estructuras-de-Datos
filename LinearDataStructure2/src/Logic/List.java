@@ -51,12 +51,11 @@ public class List {
 	{
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		Node temp = head;
-		bw.write("Grades: \n");
+		Node temp = this.head;
 		while(temp !=null)
 		{
 			bw.write(temp.toString());
-			temp= temp.next;
+			temp = temp.next;
 		}
 		bw.flush();
 	}
@@ -285,12 +284,12 @@ public class List {
 			Node temp = head;
 			
 			for(int i = 0; i < begin; i++)
-				temp = temp.getNext();
+				temp = temp.next;
 			
 			while(temp != null)
 			{
 				subList.insertAtEnd(temp.clone());
-				temp = temp.getNext();
+				temp = temp.next;
 			}
 		}
 		
@@ -303,7 +302,7 @@ public class List {
 		for(int i = 0; i < begin ; i++)
 			temp=temp.next;
 		int iterar = end - begin;
-		for(int j = 0 ; j < iterar-1 ; j++)
+		for(int j = 0 ; j < iterar ; j++)
 		{
 			subList.insertAtEnd(temp.clone());
 			temp = temp.next;

@@ -64,7 +64,7 @@ public class StringAsList {
 	 * @param regex
 	 * @return
 	 */
-	public StringAsList[] split(StringAsList regex)
+	public ArrayList<StringAsList> split(StringAsList regex)
 	{
 		ArrayList<StringAsList> response = new ArrayList<>();
 		
@@ -72,16 +72,26 @@ public class StringAsList {
 		for(int i = 0 ; i < this.length(); i++)
 		{
 			List temp = this.string.sublist(i, i + 1);
-			sublist.insertAtEnd(this.string.sublist(i, i + 1).head.clone());
+			
 			if(!temp.isEqual(regex.string))
-			{	
-				sublist.deleteAtEnd();
+				sublist.insertAtEnd(this.string.sublist(i, i + 1).head);
+			else if (sublist.length() != 0)
+			{
 				StringAsList s = new StringAsList();
 				s.string = sublist;
 				response.add(s);
+				sublist = new List();
+			}
+			
+			if(i == this.length()-1 && !temp.isEqual(regex.string) )
+			{
+				StringAsList s = new StringAsList();
+				s.string = sublist;
+				response.add(s);
+				sublist = new List();
 			}
 		}
-		return (StringAsList[]) response.toArray(); 
+		return  response;
 	}
 	
 	
@@ -131,10 +141,15 @@ public class StringAsList {
 	 */
 	public int indexOf(StringAsList regex)
 	{
-		return 0; 
+		Node temp = this.string.head;
+		for(int i = 0; i < this.length() ; i++)
+		{
+			if(temp.isEqual(regex.string.head))
+				return i;
+			temp = temp.next; 
+		}
+		return -1; 
 	}
-	
-	
 	/**
 	 * 
 	 * @param string_
@@ -163,9 +178,7 @@ public class StringAsList {
 	public StringAsList reverse()
 	{
 		StringAsList reverse = new StringAsList();
-		reverse.string = this.string.cloneList();
-		reverse.string.reverse();
-
+		reverse.string = this.string.reverse();
 		return reverse;
 	}
 	
@@ -189,28 +202,82 @@ public class StringAsList {
 	 * @return
 	 */
 	public boolean isAnagram(StringAsList anagramCandidate)
-	{
-		return false;
-	}
-	
-	
-	public void print()
-	{
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringNode temp = (StringNode)string.head;
-			
-		try 
+	{	
+		if(this.length() != anagramCandidate.length())
+			return false;
+		
+		Node temp = this.string.head;
+		int contador = 0;
+		for(int i = 0; i < this.length() ; i++)
 		{
-			while(temp != null)
+			Node temp2 = anagramCandidate.string.head;
+			for(int j = 0; j < anagramCandidate.length(); j++)
 			{
-				bw.write(temp.character);
-				temp = (StringNode)temp.getNext();
+				if(temp.isEqual(temp2))
+				{
+					contador++;
+					break;
+				}
+				temp2 = temp2.next;
 			}
-			bw.flush();
+			temp = temp.next;
 		}
-		catch (IOException ex) 
-		{
-			ex.printStackTrace();
-		}
+		
+		if(contador == this.length())
+			return true;
+		else
+			return false;
 	}
+	
+	
+	public void print() throws IOException
+	{
+		this.string.printList();
+		System.out.println();
+	}
+	
+	public static void main(String[] agrs) throws IOException
+	{
+		
+		
+		String ss ="acasohubobuhosacah";
+		
+		StringAsList s = new StringAsList(ss.toCharArray());
+		
+		if(s.isPalindrome())
+			System.out.println("palindrome");
+		else
+			System.out.println("No");
+		
+		/*s.print();
+		s = s.reverse();
+		s.print();
+		s = s.substring(3,8);
+		s.print();
+		*/
+		
+		String a = "o";
+		ArrayList<StringAsList> Arr = s.split(new StringAsList(a.toCharArray()));
+		System.out.println(Arr.size() );
+		for(StringAsList string : Arr)
+			string.print();
+		
+		
+		String anagrama1 = "thealiasmen";
+		String anagrama2 = "alansmithee";
+		
+		StringAsList Origin = new StringAsList(anagrama1.toCharArray());
+		StringAsList anagramCandidate = new StringAsList(anagrama2.toCharArray());
+		
+		if(Origin.isAnagram(anagramCandidate))
+			System.out.println("is Anagram");
+		else
+			System.out.println("No Anagram");
+		
+		System.out.println(Origin.indexOf(new StringAsList("l".toCharArray())));
+	
+	}
+	
+	
+	
 }

@@ -23,15 +23,15 @@ public class StringNode extends Node {
 	/*
 	 * 
 	 */
-	char character;
-	Node next = null;
+	public char character;
+	public Node next;
 	
 	public StringNode(char character) 
 	{	
 		this.character = character;
+		this.next = null;
 	}
 
-	
 	public void setNext(Node node) 
 	{
 		this.next = node;
@@ -55,7 +55,10 @@ public class StringNode extends Node {
 		return temp.character == this.character ? true : false;
 	}
 
-	
+	public String toString() 
+	{
+		return this.character + "";
+	}
 	public boolean isLessThan(Node node) 
 	{
 		StringNode temp = (StringNode) node;
