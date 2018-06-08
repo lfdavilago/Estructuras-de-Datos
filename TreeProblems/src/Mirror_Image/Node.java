@@ -1,53 +1,47 @@
 package Mirror_Image;
 
-import Tree.BinaryTreeNode;
 
-public class Node implements BinaryTreeNode {
+
+public class Node {
 
 	
+	public int value;
 	
-	
-	
-	@Override
-	public void setLeft(BinaryTreeNode node) {
-		// TODO Auto-generated method stub
+	public Node left;
+	public Node right;
+	public int id;
+	public Node(int i)
+	{
 		
-	}
-
-	@Override
-	public BinaryTreeNode getLeft() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setRight(BinaryTreeNode node) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public BinaryTreeNode getRight() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BinaryTreeNode clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isEqual(BinaryTreeNode node) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isLessThan(BinaryTreeNode node) {
-		// TODO Auto-generated method stub
-		return false;
+		this.value= i;
+		this.left = null;
+		this.right = null; 
+		if(i == 1)
+			this.id = 0;
+		else
+			this.id = -1;
 	}
 	
+	public boolean isEqual(int i)
+	{
+		return this.value == i ? true : false;
+	}
+	
+	public int numbreOfChild()
+	{
+		return this.left == null ? (this.right == null ? 0 : 1) : (this.right == null ? 1 : 2);
+	}
+	public void setChild(Node nodo, String Addto)
+	{
+		if(Addto.equals("L"))
+		{
+			nodo.id = this.id*2 + 1; 
+			this.left = nodo;
+		}
+		else if(Addto.equals("R"))
+		{	
+			nodo.id = this.id*2 + 2; 
+			this.right = nodo;
+		}
+	}
 }
