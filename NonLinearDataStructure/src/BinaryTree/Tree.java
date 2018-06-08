@@ -80,21 +80,40 @@ public class Tree {
 			int count = this.offSpring(temp);
 			
 			if(count == 0)
-				if(left)
-					parent.left = null;
+			{	
+				if(this.root.equals(temp))
+					this.root = null;
 				else
-					parent.right = null;
+					if(left)
+						parent.left = null;
+					else
+						parent.right = null;
+			}
 			else if(count == 1)
+			{	
 				if(temp.left != null)
-					if(left)
-						parent.left = temp.left;
+				{	
+					if(this.root.equals(temp))
+						this.root = temp.left;
 					else
-						parent.right = temp.left;
+					{	
+						if(left)
+							parent.left = temp.left;
+						else
+							parent.right = temp.left;
+					}
+				}
 				else
-					if(left)
-						parent.left = temp.right;
+					if(this.root.equals(temp))
+						this.root = temp.right;
 					else
-						parent.right = temp.right;
+					{
+						if(left)
+							parent.left = temp.right;
+						else
+							parent.right = temp.right;
+					}
+			}
 			else
 			{
 				Node min = temp.right;
@@ -110,15 +129,25 @@ public class Tree {
 				{
 					if(min.right != null)
 						minParent.left = min.right;
+					else
+						minParent.left = null;
 					min.right = temp.right;
 				}
 				
 				min.left = temp.left;
 				
-				if(left)
-					parent.left = min;
+				if(this.root.equals(temp))
+				{
+					System.out.println("PRUEBAAAAAAAAAA");
+					this.root = min;
+				}
 				else
-					parent.right = min;	
+				{
+					if(left)
+						parent.left = min;
+					else
+						parent.right = min;	
+				}
 			}
 		}
 	}
@@ -144,7 +173,7 @@ public class Tree {
 		if(node != null)
 		{
 			this.inorder_print(node.left);
-			System.out.print(node.toString());
+			System.out.print(node.toString2());
 			this.inorder_print(node.right);
 		}
 	}
@@ -155,7 +184,7 @@ public class Tree {
 		{
 			this.postorder_print(node.left);
 			this.postorder_print(node.right);
-			System.out.print(node.toString());
+			System.out.print(node.toString2());
 		}
 	}
 	
@@ -163,7 +192,7 @@ public class Tree {
 	{
 		if(node != null)
 		{
-			System.out.print(node.toString());
+			System.out.print(node.toString2());
 			this.preorder_print(node.left);
 			this.preorder_print(node.right);
 		}
@@ -182,16 +211,17 @@ public class Tree {
 		Tree test = new Tree();
 		
 		test.insert(52);
-		test.insert(18);
+		test.insert(13);
 		test.insert(74);
 		test.insert(60);
 		test.insert(87);
 		test.insert(83);
 		test.insert(100);
 		test.insert(85);
+		test.insert(53);
 		
+		test.delete(52);
 		test.delete(74);
-		test.delete(87);
 		test.preorder_print(test.root);
 
 		

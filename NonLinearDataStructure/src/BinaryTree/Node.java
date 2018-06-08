@@ -25,6 +25,10 @@ public class Node {
 		 return "Value : " + str + "\n";
 	 }
 	 
+	 public String toString2()
+	 {
+		 return "Value : " + this.value + "\n";
+	 }
 	 public Node clone()
 	 {
 		 return new Node(this.value);
