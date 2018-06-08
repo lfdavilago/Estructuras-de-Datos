@@ -221,13 +221,6 @@ public class Tree {
 		test.insert(53);
 		
 		test.delete(52);
-		test.delete(74);
 		test.preorder_print(test.root);
-
-		
-
-		
-		
-		
 	}
 }
