@@ -137,10 +137,7 @@ public class Tree {
 				min.left = temp.left;
 				
 				if(this.root.equals(temp))
-				{
-					System.out.println("PRUEBAAAAAAAAAA");
 					this.root = min;
-				}
 				else
 				{
 					if(left)
